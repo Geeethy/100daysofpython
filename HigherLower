@@ -1,0 +1,48 @@
+import game_data
+from game_data import data
+import random
+from art import logo,vs
+
+game_on= True
+score=0
+
+compare_1= data[random.randint(0,46)]
+
+def intro():
+
+    global game_on,score,compare_1
+    print(logo)
+
+    print(f'Compare A: {compare_1["name"]},a {compare_1["description"]} from {compare_1["country"]}')
+
+    print(vs)
+
+    compare_2= data[random.randint(0,46)]
+
+    if compare_1== compare_2:
+        compare_2= data[random.randint(0,46)]
+
+    print(f'Against B: {compare_2["name"]}, {compare_2["description"]} from {compare_2["country"]} ')
+    print((compare_1["follower_count"]) > (compare_2["follower_count"]))
+
+
+    answer= input("Who has more followers? Type 'A' or 'B': ").upper()
+
+
+    if answer=='A' and (compare_1["follower_count"]) > (compare_2["follower_count"]):
+        score+=1
+        print(f"You are right!. Current score: {score}")
+        compare_1 = compare_2
+
+    elif answer== 'B' and (compare_1["follower_count"])  < (compare_2["follower_count"]):
+        score+=1
+        print(f"You are right!. Current score: {score}")
+        compare_1 = compare_2
+
+    else:
+        print(f"Sorry,that's wrong. Final Score:{score}")
+        game_on =False
+
+
+while game_on:
+    intro()
